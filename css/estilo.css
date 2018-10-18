@@ -1,0 +1,62 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #fff;
+}
+
+.container {
+	width: 32%;
+	margin: 50px auto;
+}
+
+.borde {
+	padding: 20px;
+	border-radius: 0px;
+	background-color: #747474;
+}
+.rojo {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #C32424;
+}
+.verde {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #149824;
+}
+.azul {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #1215A6;
+}
+.amarillo {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #DEE523;
+}
+.morado {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #C61CD1;
+}
+.fucksia {
+	padding: 20px;
+	border-radius: 20px;
+	background-color: #EE0070;
+}
+.blanco {
+	padding: 20px;
+	border-radius: 15px;
+	background-color: #FDFDFD;
+}
+
+img {
+	border-radius: 15px;
+}
+
+.click {
+	background-color: #6F6F6F;
+}
