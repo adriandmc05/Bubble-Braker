@@ -4,7 +4,7 @@
     $_SESSION['map'] = null;
     $_SESSION['map_aux'] = null;
     $_SESSION['cont'] = 0;
-    $_SESSION['band_arr'] = false;
+    $_SESSION['acum'] = 0;
 
 	function generateMap() {
         for ($i = 0; $i < $_SESSION['map_size']; $i++) {

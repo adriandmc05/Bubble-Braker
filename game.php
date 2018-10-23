@@ -6,14 +6,16 @@
             echo '<tr>';
             for ($j = 0; $j < $_SESSION['map_size']; $j++) {
 
-                 if ($i == 0 || $i == $_SESSION['map_size']-1 || $j == 0 | $j == $_SESSION['map_size']-1) {
+                if ($i == 0 || $i == $_SESSION['map_size']-1 || $j == 0 | $j == $_SESSION['map_size']-1) {
                     $_SESSION['map'][$i][$j] = 0; 
                 }
 
-                if ($_SESSION['map_aux'][$i][$j])
+                if ($_SESSION['map_aux'][$i][$j]){
                     printEach($i, $j);
-                else
+                }
+                else{
                     printEach($i, $j);
+                }
             }
             echo '</tr>';
         }
@@ -58,7 +60,18 @@
         $col=$_GET['col'];
         $num=$_GET['mat'];
 
-        verify($fil,$col,$num);
+        if ($_SESSION['map'][$fil][$col] == 7) {
+
+            $_SESSION['map'][$fil][$col]=7;
+
+        }elseif ($_SESSION['map'][$fil-1][$col] != $num && $_SESSION['map'][$fil+1][$col] != $num && $_SESSION['map'][$fil][$col+1] != $num && $_SESSION['map'][$fil][$col-1] != $num) {
+            
+            $_SESSION['map'][$fil][$col]=$num;
+        }else{
+            verify($fil,$col,$num);
+        }
+
+  
     }
 
     function verify($fil,$col,$num){ 
@@ -67,43 +80,92 @@
             $_SESSION['map'][$fil][$col] = 0;
             return;
         }
-        $_SESSION['cont']=0;
+
         $_SESSION['map'][$fil][$col] = 7;
 
 
         if ($_SESSION['map'][$fil-1][$col] == $num) {
-            
-            $_SESSION['map'][$fil][$col] =  $num;
             verify($fil-1,$col,$num);
-        }else{
-            $_SESSION['cont']++;
-        }
-        
+        } 
+
         if ($_SESSION['map'][$fil][$col+1] == $num) {
-            $_SESSION['cont']=0;
-            $_SESSION['map'][$fil][$col] =  $num;
             verify($fil,$col+1,$num);
-        }else{
-            $_SESSION['cont']++;
-        }
-       
+        } 
+
         if ($_SESSION['map'][$fil+1][$col] == $num) {
-            $_SESSION['cont']=0;
             verify($fil+1,$col,$num);
-        }else{
-            $_SESSION['cont']++;
-        }
+        } 
 
         if ($_SESSION['map'][$fil][$col-1] == $num) {
-            $_SESSION['cont']=0;
             verify($fil,$col-1,$num);
-        }else{
-            $_SESSION['cont']++;
-        }  
+        } 
 
+        $_SESSION['cont']++;
         
     }
-   	
+
+    if ($_SESSION['cont'] == 2) {
+        
+        $_SESSION['acum']=$_SESSION['acum'] + $_SESSION['cont'];
+
+    }elseif ($_SESSION['cont'] == 3) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*2);
+
+    }elseif ($_SESSION['cont'] == 4) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*3);
+
+    }elseif ($_SESSION['cont'] == 5) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*4);
+
+    }elseif ($_SESSION['cont'] == 6) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*5);
+
+    }elseif ($_SESSION['cont'] == 7) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*6);
+
+    }elseif ($_SESSION['cont'] == 8) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*7);
+
+    }elseif ($_SESSION['cont'] == 9) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*8);
+
+    }elseif ($_SESSION['cont'] == 10) {
+
+        $_SESSION['acum']=$_SESSION['acum'] + ($_SESSION['cont']*9);
+    }
+
+
+    echo $_SESSION['acum'];
+
+    $_SESSION['cont']=0;
+
+
+    function regroup(){
+
+        for ($i=0; $i < 12; $i++) { 
+            for ($j=0; $j < 12; $j++) { 
+                
+                if ($_SESSION['map'][$i][$j] == 7 && $_SESSION['map'][$i-1][$j] != 0) {
+                    
+                    //$_SESSION['map'][$i][$j]=$_SESSION['map'][$i-1][$j];
+                    //$_SESSION['map'][$i-1][$j]=7;
+                }
+            }
+        }
+
+
+    }
+
+
+    regroup();
+
 
 ?>
 <!DOCTYPE html>
